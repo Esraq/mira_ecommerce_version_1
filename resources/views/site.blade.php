@@ -10,30 +10,12 @@
                     <div class="col-md-3">
                         <nav class="navbar bg-light">
                             <ul class="navbar-nav">
+                            @foreach($categories as $category)
+                            
                                 <li class="nav-item">
-                                    <a class="nav-link"  href="#"><i class="fa fa-home" style="color: purple;"></i>Home</a>
+                                    <a class="nav-link"  href="#"><i class="fa fa-plus-square" style="color: purple;"></i>{{$category->category_name}}</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-shopping-bag" style="color: purple;"></i>Best Selling</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-plus-square" style="color: purple;"></i>New Arrivals</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-female" style="color: purple;"></i>Fashion & Beauty</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-child" style="color: purple;"></i>Kids & Babies Clothes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-tshirt" style="color: purple;" ></i>Men & Women Clothes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-mobile-alt" style="color: purple;"></i>Gadgets & Accessories</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#"><i class="fa fa-microchip" style="color: purple;"></i>Electronics & Accessories</a>
-                                </li>
+                                @endforeach
                             </ul>
                         </nav>
                     </div>

@@ -18,6 +18,8 @@ use App\Http\Controllers\super_admin\ItemController;
 
 use App\Http\Controllers\super_admin\CategoryController;
 
+use App\Http\Controllers\super_admin\CrudController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,7 +55,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::group(['middleware' => ['auth', 'admin']], function() {
 
 
-
+    ///Route::get('/item_edit/id', [CrudController::class, 'edit']);
 
     Route::get('/super_admin', [AdminController::class, 'index']);
     
@@ -61,7 +63,10 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
     Route::resource('item', ItemController::class);
 
-    Route::resource('category', ItemController::class);
+   /// Route::post('item/{id}', 'ItemController@update')->name('item.update');
+   Route::get('/item_edit/{id}', [CrudController::class, 'edit']);
+    
+   Route::resource('category', CategoryController::class);
 
 });
 

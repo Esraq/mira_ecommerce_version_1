@@ -4,6 +4,7 @@ namespace App\Http\Controllers\super_admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -12,7 +13,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('super_admin/create_item');
+        $categories =Category::orderBy('id', 'ASC')->get();
+        view()->share('categories',$categories);
+        return view('super_admin/category_list',compact('categories'));
+       
     }
 
     /**
@@ -20,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('super_admin/create_category');
     }
 
     /**
@@ -28,7 +32,23 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_name' => 'required',
+            'icon'=>'required',
+            
+            
+        ]);
+
+        
+  
+        $input = $request->all();
+
+        Category::create($input);
+
+       
+        
+    
+        return redirect()->route('category.index')->with('success', true);
     }
 
     /**
@@ -42,24 +62,38 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        //
+        return view('super_admin/category_edit',compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,Category $category)
     {
-        //
+        $request->validate([
+            'category_name' => 'required',
+            'icon'=>'required',
+            
+            
+        ]);
+  
+        $input = $request->all();
+
+        $category->update($input);
+    
+        return redirect()->route('category.index')->with('success', true);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+         
+        return redirect()->route('category.index')->with('success', true);
     }
 }
