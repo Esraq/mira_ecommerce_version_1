@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\super_admin;
+namespace App\Http\Controllers\super_admin\Stock;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Category; 
+use App\Models\Stock; 
 
-class ItemController extends Controller
+class StockController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products =Product::orderBy('id', 'ASC')->get();
-        view()->share('products',$products);
-         return view('super_admin/item_list',compact('products'));
+        $stocks =Stock::orderBy('id', 'ASC')->get();
+        view()->share('stocks',$stocks);
+        return view('super_admin/stock/stock_list');
     }
 
     /**
@@ -24,10 +24,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-
         $categories =Category::orderBy('id', 'ASC')->get();
         view()->share('categories',$categories);
-        return view('super_admin/create_item');
+        return view('super_admin/stock/create_stock');
     }
 
     /**
@@ -36,11 +35,11 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_id' => 'required',
-            'name'=>'required',
-            'price'=>'required',
-            'size'=>'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           'name' => 'required',
+           'category_name' => 'required',
+           'price' => 'required',
+           'size' => 'required',
         ]);
 
         
@@ -54,10 +53,10 @@ class ItemController extends Controller
             $input['image'] = "$profileImage";
         }
     
-        Product::create($input);
+        Stock::create($input);
         
-    
-        return redirect()->route('item.index')->with('success', true);
+        
+        return redirect()->route('stock.index')->with('success', true);
     }
 
     /**
@@ -71,34 +70,29 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Stock $stock)
     {
-        ///$products=Product::where('id',1)->get();
-
-        echo $product;
-
-      
+        $categories =Category::orderBy('id', 'ASC')->get();
+        view()->share('categories',$categories);
+        return view('super_admin/stock/stock_edit',compact('stock'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id,Product $product)
+    public function update(Request $request,Stock $stock)
     {
-        /*
         $request->validate([
-            'category_id' => 'required',
-            'name'=>'required',
-            'price'=>'required',
-            'size'=>'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+            
+            'name' => 'required',
+            'category_name' => 'required',
+            'price' => 'required',
+            'size' => 'required',
+         ]);
   
         $input = $request->all();
-        */
-        echo $product;
   
-        /*if ($image = $request->file('image')) {
+        if ($image = $request->file('image')) {
             $destinationPath = 'image/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
@@ -107,20 +101,18 @@ class ItemController extends Controller
             unset($input['image']);
         }
           
-        $product->update($input);
+        $stock->update($input);
     
-        return redirect()->route('item.index')->with('success', true);
-        
-        */
+        return redirect()->route('stock.index')->with('success', true);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Stock $stock)
     {
-        $product->delete();
+        $stock->delete();
          
-        return redirect()->route('item.index')->with('success', true);
+        return redirect()->route('stock.index')->with('success', true);
     }
 }

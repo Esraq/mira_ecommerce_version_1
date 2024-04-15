@@ -72,7 +72,9 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        return view('super_admin/banner_edit',compact('banner'));
+     return view('super_admin/banner_edit',compact('banner'));
+
+       //echo $banner;
 
         
     }

@@ -8,6 +8,8 @@ use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\SiteController;
 
+use App\Http\Controllers\GoodController;
+
 use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -19,6 +21,8 @@ use App\Http\Controllers\super_admin\ItemController;
 use App\Http\Controllers\super_admin\CategoryController;
 
 use App\Http\Controllers\super_admin\CrudController;
+
+use App\Http\Controllers\super_admin\Stock\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +64,10 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::get('/super_admin', [AdminController::class, 'index']);
     
     Route::resource('banner', BannerController::class);
+
+    Route::resource('stock', StockController::class);
+
+    Route::resource('good',GoodController::class);
 
     Route::resource('item', ItemController::class);
 
