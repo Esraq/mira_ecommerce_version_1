@@ -12,6 +12,8 @@ use App\Http\Controllers\GoodController;
 
 use App\Http\Controllers\AdminController;
 
+use App\Http\Controllers\InformationController;
+
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\super_admin\BannerController;
@@ -23,6 +25,8 @@ use App\Http\Controllers\super_admin\CategoryController;
 use App\Http\Controllers\super_admin\CrudController;
 
 use App\Http\Controllers\super_admin\Stock\StockController;
+
+use App\Http\Controllers\super_admin\Partner\PartnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,10 +75,16 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
     Route::resource('item', ItemController::class);
 
-   /// Route::post('item/{id}', 'ItemController@update')->name('item.update');
-   Route::get('/item_edit/{id}', [CrudController::class, 'edit']);
+    Route::resource('partner',PartnerController::class);
+
+   ///Route::post('item/{id}', 'ItemController@update')->name('item.update');
+   Route::get('/information', [InformationController::class, 'info']);
+
+   Route::get('/edit_info/{id}', [InformationController::class, 'edit_info']);
     
    Route::resource('category', CategoryController::class);
+
+   Route::post('/update_info/{id}', [InformationController::class, 'update']);
 
 });
 

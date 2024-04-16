@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 
-use App\Models\Category; 
+use App\Models\Category;
+
+use App\Models\Information;
 
 class GoodController extends Controller
 {
@@ -57,9 +59,34 @@ class GoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        /*$request->validate([
+            'title' => 'required',
+            'details'=>'required',
+            
+            
+        ]);
+  
+        $input = $request->all();
+
+        //echo $input->title;
+
+        $info->update($input);
+    
+        return redirect('information')->with('success', true);
+
+        */
+
+        $info =Information::find($request->id);
+        $info->update([
+            'title' => $request->title,
+            'details' => $request->details,
+            
+        ]);
+
+        return redirect('information')->with('success', true);
+
     }
 
     /**
