@@ -28,6 +28,8 @@ use App\Http\Controllers\super_admin\Stock\StockController;
 
 use App\Http\Controllers\super_admin\Partner\PartnerController;
 
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,13 +53,24 @@ Route::resource('product', ProductController::class);
 
 Route::get('/add_cart/{product_id}/{product_name}/{product_price}', [CartController::class, 'addToCart']);
 
+Route::get('/user_login', function () {
+    return view('user_login');
+});
 
+Route::get('/user_logout', function () {
+    Session::forget('user');
+    return redirect('login');
+});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post("add_to_cart",[ProductController::class,'addToCart']);
+
 Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::post("/user_login",[UserController::class,'login']);
 
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
@@ -85,6 +98,7 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
    Route::resource('category', CategoryController::class);
 
    Route::post('/update_info/{id}', [InformationController::class, 'update']);
+
 
 });
 

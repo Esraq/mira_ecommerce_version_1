@@ -4,61 +4,43 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Cart;
+
+use Session;
+
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    function addToCart(Request $req)
     {
-        return view('product');
+
+
+         //$a=$req->product_id;
+        /// echo $a;
+
+        
+        if($req->session()->has('user'))
+        {
+           $cart= new Cart;
+           $cart->user_id=$req->session()->get('user')['id'];
+           $cart->product_id=$req->product_id;
+           $cart->save();
+           return redirect('/');
+
+        }
+        else
+        {
+            return redirect('/login');
+        }
+
+        
+      
+
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    static function cartItem()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+     $userId=Session::get('user')['id'];
+     return Cart::where('user_id',$userId)->count();
     }
 }

@@ -1,11 +1,12 @@
-@php
-    session_start();
-@endphp
+<?php 
+use App\Http\Controllers\ProductController;
+$total=0;
+if(Session::has('user'))
+{
+  $total= ProductController::cartItem();
+}
 
-
-@php
-    $sessionCount = count(session()->all());
-@endphp
+?>
 
 
 <!DOCTYPE html>
@@ -119,7 +120,7 @@
         </a>
         <a href="cart.html" class="btn cart" style="color: purple;">
             <i class="fa fa-shopping-cart" style="color: purple;"></i>
-            <span style="color: purple;">{{ $sessionCount }}</span>
+            <span style="color: purple;">{{$total}}</span>
         </a>
     </div>
 </div>
