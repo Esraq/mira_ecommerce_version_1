@@ -59,7 +59,7 @@ Route::get('/user_login', function () {
 
 Route::get('/user_logout', function () {
     Session::forget('user');
-    return redirect('login');
+    return redirect('user_login');
 });
 
 Auth::routes();
@@ -75,6 +75,10 @@ Route::post("/user_login",[UserController::class,'login']);
 Route::get("cartlist",[ProductController::class,'cartList']); 
 
 Route::get("removecart/{id}",[ProductController::class,'removeCart']); 
+
+Route::get("ordernow",[ProductController::class,'orderNow']);
+
+Route::post("orderplace",[ProductController::class,'orderplace']);
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
 

@@ -73,8 +73,11 @@
                                             <h2>Grand Total<span>$100</span></h2>
                                         </div>
                                         <div class="cart-btn">
-                                            <button>Update Cart</button>
-                                            <button>Checkout</button>
+                                            
+                                        <a href="/ordernow" class="button_class">
+  <button>Place Order</button>
+</a>
+
                                         </div>
                                     </div>
                                 </div>
