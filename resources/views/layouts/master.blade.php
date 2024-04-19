@@ -118,7 +118,7 @@ if(Session::has('user'))
             <i class="fa fa-heart" style="color: purple;"></i>
             <span style="color: purple;">(0)</span>
         </a>
-        <a href="cart.html" class="btn cart" style="color: purple;">
+        <a href="/cartlist" class="btn cart" style="color: purple;">
             <i class="fa fa-shopping-cart" style="color: purple;"></i>
             <span style="color: purple;">{{$total}}</span>
         </a>

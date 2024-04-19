@@ -72,6 +72,9 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::post("/user_login",[UserController::class,'login']);
 
+Route::get("cartlist",[ProductController::class,'cartList']); 
+
+Route::get("removecart/{id}",[ProductController::class,'removeCart']); 
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
 
