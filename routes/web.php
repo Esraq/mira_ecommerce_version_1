@@ -72,13 +72,19 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::post("/user_login",[UserController::class,'login']);
 
+Route::post("/user_registration",[UserController::class,'register']);
+
 Route::get("cartlist",[ProductController::class,'cartList']); 
 
 Route::get("removecart/{id}",[ProductController::class,'removeCart']); 
 
+Route::get("productdetails/{id}",[ProductController::class,'productDetails']); 
+
 Route::get("ordernow",[ProductController::class,'orderNow']);
 
 Route::post("orderplace",[ProductController::class,'orderplace']);
+
+Route::get("myorders",[ProductController::class,'myOrders']);
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
 

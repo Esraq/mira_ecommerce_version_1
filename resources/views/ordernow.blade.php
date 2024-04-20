@@ -30,7 +30,14 @@
                                             <option value="nagad">Nagad</option>
                                         </select>
                                     </div>
-                                   
+                                    <div class="col-md-6">
+                                        <label>Mobile Number:</label>
+                                        <input class="form-control" name="mobile_no" type="text" placeholder="Mobile Number" >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Postal Code</label>
+                                        <input class="form-control" name="postal_code" type="text" placeholder="postal_code" >
+                                    </div>
 
                                     
                                 </div>

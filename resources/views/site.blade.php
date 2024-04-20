@@ -213,19 +213,19 @@
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
                             </div>
-                            <form action="/add_to_cart" method="POST">
+                           
                             <div class="product-price">
-                                <h3><span>$</span>99</h3>
+                                <h3><span>$</span>{{$stock->price}}</h3>
                                 
-           @csrf
-           <input type="hidden" name="product_id" value="{{$stock->id}}">
-       <button class="btn btn-primary">Add to Cart</button>
+          
+       <button class="btn btn-primary"><a href="/productdetails/{{$stock->id}}" class="btn btn-primary">Buy Now</a>
+</button>
        
                             </div>
                         </div>
                     </div>
                     
-</form>
+
                     @endforeach
                 </div>
             </div>
